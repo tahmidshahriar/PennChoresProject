@@ -1,0 +1,67 @@
+{% extends 'penntext/base.html' %}
+    
+{% block title %} Jobs {% endblock %}
+
+{% block head %} {{job_name_url}} {% endblock %}
+{% block detail %} Accept/Post jobs here{% endblock %}
+{% block body_block %}
+            {% if user.is_authenticated %}
+            <font size="4">            
+            <a href="/localquaker/{{job_name_url}}/add_job" class="button"> Add a New Job Advertisement </a>
+            </font>
+            <hr>
+            {% endif %}
+
+    {% if job_list %}
+            <font size="3">
+            
+                {% for job in job_list %}
+                
+<section>
+                      <h3>Title: {{job.title}}</h3>
+                      <p>
+                <strong> Time Posted: </strong><font color="red"> {{ job.timeposted }} </font><br/> 
+               <strong> Email: </strong><font color="red"> {{ job.email }} </font> 
+               <br/>
+
+               {% if job.contact = 0 %}
+               <strong> Phone: </strong><font color="red"> Not Provided </font>
+               <br/>
+
+               {% else %}
+              <strong> Phone: </strong><font color="red"> {{job.contact}} </font>
+               <br/>{% endif %}
+
+               <strong> Money Awarded: </strong><font color="red"> {{ job.pricepaid }} </font> <br/>
+
+               {% if job.typeofpay = 1 %}
+               <strong> Payment Type: </strong><font color="red"> On an hourly basis </font> <br/>
+               {% else %}
+               <strong> Payment Type: </strong><font color="red"> Flat price </font> 
+               <br/>
+               {% endif %}
+
+               <strong> Cost of job: </strong><font color="red"> {{ job.costofjob }} </font><br/> 
+               <strong> Time to do the job (minutes): </strong><font color="red"> {{ job.timeofjob }} </font> <br/>
+
+               <strong> Location of drop-off/pick-up: </strong><font color="red"> {{ job.location }} </font><br/>
+               <strong> Payment void by: </strong><font color="blue"> {{ job.nopaymentafter }} </font><br/>
+               <strong> Description: </strong><font color="red"> {{ job.description }} </font> 
+               <br><br>
+        {% if job.picture %}
+            
+            <br><img src="{{ job.picture.url }}"  /><br>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <a href="/localquaker/{{job.id}}/{{job.url}}/{{job.job}}" class ="button">  <u>Accept This Job</u></a> 
+        {% endif %}
+
+</div><br>
+<hr> 
+                {% endfor %}
+                      </p>
+                    </section>
+            </font>
+            {% endif %}
+        
+{% endblock %}

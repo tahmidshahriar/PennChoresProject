@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<html>
+  <head>
+                    
+    <title>
+    LocalQuaker
+    </title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+      <link href="{% static 'css/skel.css' %}" rel="stylesheet">
+      <link href="{% static 'css/style.css' %}" rel="stylesheet" >
+      <link href="{% static 'css/style-desktop.css' %}" rel="stylesheet" >
+        
+    <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+  </head>
+
+<body class="homepage">
+
+    <!-- Header -->
+      <header id="header">
+        <div class="logo container">
+          <div>
+            <h1><a href="/" id="logo">LocalQuaker</a></h1>
+            <p>
+              {% if user.is_authenticated %}
+              ({{user.username}})
+              {% endif %}
+            </p>
+          </div>
+        </div>
+      </header>
+
+
+
+
+
+      <nav id="nav" class="skel-layers-fixed">
+        <ul>
+          <li class="current"><a href="/">Home</a></li>
+          <li>
+            <a href="">Categories</a>
+            <ul>
+              <li><a href="/localquaker/clean/job"> Cleaning </a></li>
+              <li><a href="/localquaker/shop/job"> Shopping </a></li>
+              <li><a href="/localquaker/moving/job"> Moving </a></li>
+              <li><a href="/localquaker/academic/job"> Academics </a></li>
+              <li><a href="/localquaker/interview/job"> Interview </a></li>
+            </ul>
+          </li>
+          {% if user.is_authenticated %}
+          <li><a href="/localquaker/my_job/">My Posted Jobs</a></li>          
+          <li><a href="/localquaker/my_accepted/">My Accepted Jobs</a></li>          
+          <li><a href="/localquaker/logout/">Logout</a></li>
+
+          {% else %}
+          <li><a href="/localquaker/login/">Login</a></li>
+
+          <li><a href="/localquaker/register/">Register</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+        
+        <hr>
+            
+    <!--Ends here -->
+  <div id="main-wrapper">
+        <div id="main" class="container">
+          <div class="row">
+            <div class="12u">
+              <div class="content">
+                  <article class="box page-content">
+
+                    <header>
+                      <h2> {% block head %} Head {% endblock %}</h2>
+                      <p>{% block detail %} Detail {% endblock%}</p>
+                    </header>
+
+                    <section>
+                      <p>
+                                {% block body_block %}
+                                {% endblock %}
+                      </p>
+                    </section>
+                    
+                  </article>
+
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>
+
+
+<footer id="footer" class="container">
+        <div class="row double">
+          <div class="12u">
+              <ul class="special">
+                    <li><a href="https://www.linkedin.com/pub/tahmid-shahriar/95/2b7/554" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                    <li><a href="https://www.facebook.com/tshahriar1" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                    <li><a href="/localquaker/about" class="icon fa-question"><span class="label">How To Use</span></a></li>
+                  </ul>
+                
+            <!-- About -->
+              <section>
+                <h2 class="major"><span>What's this about?</span></h2>
+                <p>
+                  This is <strong>LocalQuaker</strong>, a website dedicated to make your life Penn easier.
+                </p>
+              </section>
+
+          </div>
+        </div>
+        <div id="copyright">
+            <ul class="menu">
+              <li>&copy; LocalQuaker. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+          </div>
+
+  </footer>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery.dropotron.min.js' %}"></script>
+    <script src="{% static 'js/skel.min.js' %}"></script>
+    <script src="{% static 'js/skel-layers.min.js' %}"></script>
+    <script src="{% static 'js/init.js' %}"></script>
+    
+    </body>
+
+</html>

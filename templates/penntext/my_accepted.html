@@ -1,0 +1,54 @@
+{% extends 'penntext/base.html' %}
+    
+{% block title %} My Jobs{% endblock %}
+{% block head %} Jobs you have accepted (ongoing) {% endblock %}
+{% block detail %} Below are all the jobs you are currently responsible for. {% endblock %}
+        
+{% block body_block %}
+            {% if myJobs %}
+                {% for job in job_list %}
+                
+<section>
+                      <h3>Title: {{job.title}}</h3>
+                      <p>
+                <strong> Time Posted: </strong><font color="red"> {{ job.timeposted }} </font><br/> 
+               <strong> Email: </strong><font color="red"> {{ job.email }} </font> 
+               <br/>
+
+               {% if job.contact = 0 %}
+               <strong> Phone: </strong><font color="red"> Not Provided </font>
+               <br/>
+
+               {% else %}
+              <strong> Phone: </strong><font color="red"> {{job.contact}} </font>
+               <br/>{% endif %}
+
+               <strong> Money Awarded: </strong><font color="red"> {{ job.pricepaid }} </font> <br/>
+
+               {% if job.typeofpay = 1 %}
+               <strong> Payment Type: </strong><font color="red"> On an hourly basis </font> <br/>
+               {% else %}
+               <strong> Payment Type: </strong><font color="red"> Flat price </font> 
+               <br/>
+               {% endif %}
+
+               <strong> Cost of job: </strong><font color="red"> {{ job.costofjob }} </font><br/> 
+               <strong> Time to do the job (minutes): </strong><font color="red"> {{ job.timeofjob }} </font> <br/>
+
+               <strong> Location of drop-off/pick-up: </strong><font color="red"> {{ job.location }} </font><br/>
+               <strong> Payment void by: </strong><font color="blue"> {{ job.nopaymentafter }} </font><br/>
+               <strong> Description: </strong><font color="red"> {{ job.description }} </font> 
+               <br><br>
+        {% if job.picture %}
+            
+            <br><img src="{{ job.picture.url }}"  /><br>
+        {% endif %}
+ </div><br>
+<hr> 
+                {% endfor %}
+                      </p>
+                    </section>
+ 
+            {% endif %}
+            </font>
+{% endblock %}

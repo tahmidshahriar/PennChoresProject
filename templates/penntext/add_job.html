@@ -1,0 +1,25 @@
+{% extends 'penntext/base.html' %}
+{% block title %} Add a Job {% endblock %}
+{% block head %} Post job to {{job_name_url}} {% endblock %}
+{% block detail %} Please fill out the form below {% endblock %}
+
+{% block body_block %}
+    <h1>Add a Job</h1>
+    
+    <form id="flatprice_form" method="post" action="/localquaker/{{job_name_url}}/add_job/" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+            {% endfor %}
+
+      {% for field in form.visible_fields %}
+           <div class = "form-group">
+            {{ field.errors }}
+            {{ field.help_text }}
+            </br>{{ field }}
+        </div>
+        {% endfor %}
+
+      <input type="submit" name="submit" value="Create Job" />
+    </form>
+{% endblock %}

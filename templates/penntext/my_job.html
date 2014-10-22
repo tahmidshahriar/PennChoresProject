@@ -1,0 +1,79 @@
+{% extends 'penntext/base.html' %}
+    
+{% block title %} My Jobs{% endblock %}
+{% block head %} Jobs you have posted {% endblock %}
+{% block detail %} Below are all the jobs you have posted. You can complete/delete jobs here{% endblock %}
+        
+{% block body_block %}
+				{% if error %} <font size = '6' color="red"><u>{{error}}</u></font><br>
+        {% endif %}
+	          
+            {% if myJobs %}
+                {% for job in myJobs %} 
+                <section>
+                      <h3>Title: {{job.title}}</h3>
+                      <p>
+
+               <strong> Time Posted: </strong><font color="green"> {{ job.timeposted }} </font><br/> 
+               <strong> Email: </strong><font color="green"> {{ job.email }} </font> 
+               <br/>
+               {% if job.contact = 0 %}
+               <strong> Phone: </strong><font color="green"> Not Provided </font>
+               <br/>
+
+               {% else %}
+              <strong> Phone: </strong><font color="green"> {{job.contact}} </font>
+               <br/>{% endif %}
+
+               <strong> Money Awarded: </strong><font color="green"> {{ job.pricepaid }} </font> <br/>
+
+               {% if job.typeofpay = 1 %}
+               <strong> Payment Type: </strong><font color="green"> On an hourly basis </font> <br/>
+               {% else %}
+               <strong> Payment Type: </strong><font color="green"> Flat price </font> 
+               <br/>
+               {% endif %}
+
+               <strong> Cost of job: </strong><font color="green"> {{ job.costofjob }} </font><br/> 
+               <strong> Time to do the job (minutes): </strong><font color="green"> {{ job.timeofjob }} </font> <br/>
+
+               <strong> Location of drop-off/pick-up: </strong><font color="green"> {{ job.location }} </font><br/>
+               <strong> Payment void by: </strong><font color="green"> {{ job.nopaymentafter }} </font><br/>
+               <strong> Description: </strong><font color="green"> {{ job.description }} </font> 
+               <br>
+<div>
+        {% if job.picture %}
+            
+            <img src="{{ job.picture.url }}"  />
+            
+        {% endif %}
+</div>
+
+{% if job.acceptedby %}
+                <font color = "orange"> <strong> This job has been accepted and cannot be cancelled. Enter code (provided by job-taker upon payment) to finish the  job.</strong></font>
+
+        <form id="price_offer" action="/localquaker/del/{{job.id}}/{{code}}">
+<strong>
+                Code: <input type="number" name="code"> </br>
+</strong>   </br>
+                <input type="submit"/>
+                </form>
+        
+
+
+
+
+
+
+
+{% else %}
+                    <a href="/localquaker/del/{{job.id}}" class = 'button'>Delete This Job</a>
+                {% endif %}
+
+                
+<hr></p></section>
+                {% endfor %}
+            {% endif %}
+
+            </font>
+{% endblock %}
